@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>EBI/EPEF Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f7f7f7;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+      max-width: 350px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>EBI/EPEF Calculator</h2>
+    
+    <label for="avg_weight_gain">Average Weight Gain (g/day):</label>
+    <input type="number" id="avg_weight_gain" placeholder="e.g. 61">
+    
+    <label for="survival_rate">Survival Rate (%):</label>
+    <input type="number" id="survival_rate" placeholder="e.g. 96">
+    
+    <label for="feed_conversion">Feed Conversion Ratio:</label>
+    <input type="number" step="0.01" id="feed_conversion" placeholder="e.g. 1.62">
+    
+    <button onclick="calculateEBI()">Calculate EBI</button>
+    
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateEBI() {
+      let avg_weight_gain = parseFloat(document.getElementById("avg_weight_gain").value);
+      let survival_rate = parseFloat(document.getElementById("survival_rate").value);
+      let feed_conversion = parseFloat(document.getElementById("feed_conversion").value);
+      
+      if (isNaN(avg_weight_gain) || isNaN(survival_rate) || isNaN(feed_conversion)) {
+        document.getElementById("result").innerText = "Please enter all values.";
+        return;
+      }
+
+      let ebi = ((avg_weight_gain * survival_rate) / feed_conversion) * 10;
+      document.getElementById("result").innerText = `European Broiler Index (EBI/EPEF): ${ebi.toFixed(1)}`;
+    }
+  </script>
+</body>
+</html>
