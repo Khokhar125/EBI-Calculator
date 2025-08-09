@@ -9,6 +9,25 @@
       margin: 20px;
       background-color: #f7f7f7;
     }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .header img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 2px solid #ccc;
+    }
+    h1 {
+      font-size: 18px;
+      color: #333;
+      text-align: center;
+    }
     .container {
       background: #fff;
       padding: 20px;
@@ -16,15 +35,27 @@
       box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
       max-width: 350px;
       margin: auto;
+      text-align: center;
+    }
+	.subheading {
+    font-weight: bold;
+    color: #333;
     }
     h2 {
-      text-align: center;
       color: #333;
+      margin-bottom: 2px;
+    }
+    .subheading {
+      font-size: 14px;
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 15px;
     }
     label {
       display: block;
       margin-top: 10px;
       font-weight: bold;
+      text-align: left;
     }
     input {
       width: 100%;
@@ -57,8 +88,15 @@
   </style>
 </head>
 <body>
+
+  <div class="header">
+    <img src="mamu_khurrum_pic.jpg" alt="Creator Picture">
+    <h1>Dr. Malik Khurrum Shahzad Khokhar is the Creator of this Calculator.</h1>
+  </div>
+
   <div class="container">
-    <h2>EBI/EPEF Calculator</h2>
+    <h2>EBI Calculator</h2>
+    <p class="subheading"><b>(European Broiler Index)</p>
     
     <label for="avg_weight_gain">Average Weight Gain (g/day):</label>
     <input type="number" id="avg_weight_gain" placeholder="e.g. 61">
@@ -89,5 +127,6 @@
       document.getElementById("result").innerText = `European Broiler Index (EBI/EPEF): ${ebi.toFixed(1)}`;
     }
   </script>
+
 </body>
 </html>
