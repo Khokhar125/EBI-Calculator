@@ -122,8 +122,8 @@
         document.getElementById("result").innerText = "Please enter all values.";
         return;
       }
-
-      let ebi = ((avg_weight_gain * survival_rate) / feed_conversion);
+	  feed_conversion = 50 / feed_conversion;
+      let ebi = ((avg_weight_gain * survival_rate) / feed_conversion) / 10;
       document.getElementById("result").innerText = `European Broiler Index (EBI): ${ebi.toFixed(1)}`;
     }
   </script>
