@@ -189,7 +189,12 @@
 
     feed_conversion = 50 / feed_conversion;
     let ebi = ((avg_weight_gain * survival_rate) / feed_conversion) / 10;
-    document.getElementById("result").innerText = `European Broiler Index (EBI): ${ebi.toFixed(1)}`;
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerText = `European Broiler Index (EBI): ${ebi.toFixed(1)}`;
+    resultDiv.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
   }
 </script>
 
