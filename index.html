@@ -1,240 +1,245 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EBI/EPEF Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBI/EPEF Calculator</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 10px;
-      background-color: #f7f7f7;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+            background-color: #f7f7f7;
+        }
 
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
 
-    .header img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-right: 10px;
-      border: 2px solid #ccc;
-    }
+        .header img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid #ccc;
+        }
 
-    h1 {
-      font-size: 18px;
-      color: #333;
-      text-align: center;
-    }
+        h1 {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
 
-    h2 {
-      color: #333;
-      margin-bottom: 2px;
-    }
+        .subheading {
+            font-size: 14px;
+            color: #666;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
 
-    .subheading {
-      font-size: 14px;
-      color: #666;
-      margin-top: 0;
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
+        h2 {
+            color: #333;
+            margin-bottom: 2px;
+        }
 
-    label {
-      display: block;
-      margin-top: 8px;
-      font-weight: bold;
-      text-align: left;
-    }
+        label {
+            display: block;
+            margin-top: 8px;
+            font-weight: bold;
+            text-align: left;
+        }
 
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 6px;
-    }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 6px;
+        }
 
-    button {
-      margin-top: 15px;
-      padding: 10px;
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      position: sticky;
-      bottom: 10px;
-    }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            position: sticky;
+            bottom: 10px;
+        }
 
-    button:hover {
-      background-color: #45a049;
-    }
+        button:hover {
+            background-color: #45a049;
+        }
 
-    #result {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      color: #222;
-    }
+        #result {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+        }
 
-    .container {
-      background: #fff;
-      padding: 16px;
-      border-radius: 12px;
-      box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
-      max-width: 520px;
-      width: 95%;
-      margin: auto;
-      text-align: center;
-    }
+        .container {
+            background: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
+            max-width: 520px;
+            width: 95%;
+            margin: auto;
+            text-align: center;
+        }
 
-    @media (max-width: 480px) {
-      .container div[style*="display: flex"] {
-        gap: 8px;
-      }
-    }
+        @media (max-width: 480px) {
+            .container div[style*="display: flex"] {
+                gap: 8px;
+            }
+        }
 
-    @media (max-width: 600px) {
-      .row {
-        flex-direction: column;
-      }
+        @media (max-width: 600px) {
+            .row {
+                flex-direction: column;
+            }
 
-      h1 {
-        font-size: 14px;
-      }
-    }
-  </style>
+            h1 {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <div class="header">
-    <img src="mamu_khurrum_pic.jpg" alt="Creator Picture">
-    <h1>Dr. Malik Khurrum Shahzad Khokhar is the Creator of this European Broiler Index (EBI) Calculator.</h1>
-  </div>
-
-  <div class="container">
-
-    <h2>EBI Calculator</h2>
-    <p class="subheading">(European Broiler Index)</p>
-
-    <!-- Chicks & Mortality -->
-    <div style="display: flex; gap: 10px;">
-      <div style="flex: 1;">
-        <label>Total Chicks:</label>
-        <input type="number" id="total_chicks" placeholder="e.g. 30000" oninput="updateSurvivalRate(); updateAvgWeight();">
-      </div>
-
-      <div style="flex: 1;">
-        <label>Total Mortality:</label>
-        <input type="number" id="total_mortality" placeholder="e.g. 900" oninput="updateSurvivalRate(); updateAvgWeight();">
-      </div>
+    <div class="header">
+        <img src="mamu_khurrum_pic.jpg" alt="Creator Picture">
+        <h1>
+            Dr. Malik Khurrum Shahzad Khokhar is the Creator of this European Broiler Index (EBI) Calculator.
+        </h1>
     </div>
 
-    <label>Survival Rate (%):</label>
-    <input type="number" id="survival_rate" readonly>
+    <div class="container" style="padding: 20px;">
+        <h2>EBI Calculator</h2>
+        <p class="subheading"><b>(European Broiler Index)</b></p>
 
-    <!-- Total Weight -->
-    <label>Total Weight (kg):</label>
-    <input type="number" id="total_weight_all" placeholder="e.g. 80000" oninput="updateAvgWeight()">
+        <!-- Survival Rate Section -->
+        <div style="display: flex; gap: 10px;">
+            <div style="flex: 1; margin-right: 15px;">
+                <label for="total_chicks">Total Chicks:</label>
+                <input type="number" id="total_chicks" placeholder="e.g. 30000" oninput="updateSurvivalRate()">
+            </div>
 
-    <!-- Avg Weight -->
-    <label>Average Weight (g):</label>
-    <input type="number" id="total_weight" readonly>
+            <div style="flex: 1;">
+                <label for="total_mortality">Total Mortality:</label>
+                <input type="number" id="total_mortality" placeholder="e.g. 900" oninput="updateSurvivalRate()">
+            </div>
+        </div>
+		
+		<label for="survival_rate">Survival Rate (%):</label>
+        <input type="number" id="survival_rate" placeholder="Auto calculated" readonly>
+		
+		<label>Total Weight (kg):</label>
+		<input type="number" id="total_weight_all" placeholder="e.g. 80000" oninput="updateAvgWeight()">
 
-    <!-- Sold Day -->
-    <label>Sold At Day:</label>
-    <input type="number" id="sold_at_day" placeholder="e.g. 35" oninput="updateAvgWeightGain()">
+        <!-- Average Weight Gain Section -->
+        <div style="display: flex; gap: 10px;">
+            <div style="flex: 1; margin-right: 15px;">
+                <label for="total_weight">Average Weight (g):</label>
+                <input type="number" id="total_weight" placeholder="e.g. 2800" oninput="updateAvgWeightGain()">
+            </div>
 
-    <!-- Avg Weight Gain -->
-    <label>Average Weight Gain (g/day):</label>
-    <input type="number" id="avg_weight_gain" readonly>
+            <div style="flex: 1;">
+                <label for="sold_at_day">Sold At Day:</label>
+                <input type="number" id="sold_at_day" placeholder="e.g. 35" oninput="updateAvgWeightGain()">
+            </div>
+        </div>
 
-    <!-- FCR -->
-    <label>Feed Conversion Ratio:</label>
-    <input type="number" step="0.01" id="feed_conversion" placeholder="e.g. 1.6">
+        <label for="avg_weight_gain">Average Weight Gain (g/day):</label>
+        <input type="number" id="avg_weight_gain" placeholder="Auto calculated" readonly>
 
-    <button onclick="calculateEBI()">Calculate EBI</button>
+        <!-- Feed Conversion -->
+        <label for="feed_conversion">Feed Conversion Ratio:</label>
+        <input type="number" step="0.01" id="feed_conversion" placeholder="e.g. 30.0">
 
-    <div id="result"></div>
+        <button onclick="calculateEBI()">Calculate EBI</button>
 
-  </div>
+        <div id="result"></div>
+    </div>
 
-<script>
+    <script>
+        // Auto Survival Rate
+        function updateSurvivalRate() {
+            let total_chicks = parseFloat(document.getElementById("total_chicks").value);
+            let total_mortality = parseFloat(document.getElementById("total_mortality").value);
 
-  function updateSurvivalRate() {
-    let chicks = parseFloat(document.getElementById("total_chicks").value);
-    let mortality = parseFloat(document.getElementById("total_mortality").value);
+            if (!isNaN(total_chicks) && total_chicks > 0 && !isNaN(total_mortality)) {
+                let survival_rate = 100 - ((total_mortality / total_chicks) * 100);
+                document.getElementById("survival_rate").value = survival_rate.toFixed(2);
+            } else {
+                document.getElementById("survival_rate").value = "";
+            }
+        }
+		
+		 function updateAvgWeight() {
+			let totalWeightKg = parseFloat(document.getElementById("total_weight_all").value);
+			let chicks = parseFloat(document.getElementById("total_chicks").value);
+			let mortality = parseFloat(document.getElementById("total_mortality").value);
 
-    if (!isNaN(chicks) && chicks > 0 && !isNaN(mortality)) {
-      let survival = 100 - ((mortality / chicks) * 100);
-      document.getElementById("survival_rate").value = survival.toFixed(2);
-    } else {
-      document.getElementById("survival_rate").value = "";
-    }
-  }
+			if (!isNaN(totalWeightKg) && !isNaN(chicks) && !isNaN(mortality)) {
+				let liveBirds = chicks - mortality;
 
-  function updateAvgWeight() {
-    let totalWeightKg = parseFloat(document.getElementById("total_weight_all").value);
-    let chicks = parseFloat(document.getElementById("total_chicks").value);
-    let mortality = parseFloat(document.getElementById("total_mortality").value);
+			if (liveBirds > 0) {
+				let avgWeight = (totalWeightKg * 1000) / liveBirds;
+				document.getElementById("total_weight").value = avgWeight.toFixed(2);
 
-    if (!isNaN(totalWeightKg) && !isNaN(chicks) && !isNaN(mortality)) {
-      let liveBirds = chicks - mortality;
+				updateAvgWeightGain();
+			}
+			} else {
+				document.getElementById("total_weight").value = "";
+			}
+		}
 
-      if (liveBirds > 0) {
-        let avgWeight = (totalWeightKg * 1000) / liveBirds;
-        document.getElementById("total_weight").value = avgWeight.toFixed(2);
+        // Auto Avg Weight Gain
+        function updateAvgWeightGain() {
+            let total_weight = parseFloat(document.getElementById("total_weight").value);
+            let sold_at_day = parseFloat(document.getElementById("sold_at_day").value);
 
-        updateAvgWeightGain();
-      }
-    } else {
-      document.getElementById("total_weight").value = "";
-    }
-  }
+            if (!isNaN(total_weight) && !isNaN(sold_at_day) && sold_at_day > 0) {
+                let avg_weight_gain = total_weight / sold_at_day;
+                document.getElementById("avg_weight_gain").value = avg_weight_gain.toFixed(2);
+            } else {
+                document.getElementById("avg_weight_gain").value = "";
+            }
+        }
 
-  function updateAvgWeightGain() {
-    let weight = parseFloat(document.getElementById("total_weight").value);
-    let days = parseFloat(document.getElementById("sold_at_day").value);
+        // EBI Calculation
+        function calculateEBI() {
+            let avg_weight_gain = parseFloat(document.getElementById("avg_weight_gain").value);
+            let survival_rate = parseFloat(document.getElementById("survival_rate").value);
+            let feed_conversion = parseFloat(document.getElementById("feed_conversion").value);
 
-    if (!isNaN(weight) && !isNaN(days) && days > 0) {
-      let gain = weight / days;
-      document.getElementById("avg_weight_gain").value = gain.toFixed(2);
-    } else {
-      document.getElementById("avg_weight_gain").value = "";
-    }
-  }
+            if (isNaN(avg_weight_gain) || isNaN(survival_rate) || isNaN(feed_conversion)) {
+                document.getElementById("result").innerText = "Please enter all values.";
+                return;
+            }
 
-  function calculateEBI() {
-    let gain = parseFloat(document.getElementById("avg_weight_gain").value);
-    let survival = parseFloat(document.getElementById("survival_rate").value);
-    let fcr = parseFloat(document.getElementById("feed_conversion").value);
+            feed_conversion = 50 / feed_conversion;
 
-    if (isNaN(gain) || isNaN(survival) || isNaN(fcr)) {
-      document.getElementById("result").innerText = "Please enter all values.";
-      return;
-    }
+            let ebi = ((avg_weight_gain * survival_rate) / feed_conversion) / 10;
 
-    fcr = 50 / fcr;
-    let ebi = ((gain * survival) / fcr) / 10;
-
-    document.getElementById("result").innerText =
-      "European Broiler Index (EBI): " + ebi.toFixed(1);
-  }
-
-</script>
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerText = `European Broiler Index (EBI): ${ebi.toFixed(1)}`;
+            resultDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    </script>
 
 </body>
 </html>
